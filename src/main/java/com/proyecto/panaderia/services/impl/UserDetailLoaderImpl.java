@@ -10,8 +10,9 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class UserDetailLoaderImpl implements UserDetailsService {
+    // Inyección del repositorio de usuarios.
     private final UsuarioRepositorio usuarioRepositorio;
-
+    // Implementación del método para cargar un usuario por su nombre de usuario.
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return usuarioRepositorio.findByUsuario(username).orElseThrow(() -> new UsernameNotFoundException("user is not valid"));

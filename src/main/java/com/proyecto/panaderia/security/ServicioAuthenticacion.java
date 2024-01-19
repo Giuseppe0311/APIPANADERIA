@@ -29,23 +29,29 @@ import java.util.Set;
 @RequiredArgsConstructor
 // TODO : TENER EN CUENTA QUE AQUI SE ESTA HACIENDO PRUEBAS , CONSIDERAR MEJORAR PRACTICAS
 public class ServicioAuthenticacion {
+    // Inyección de dependencias de varios componentes y servicios.
     private final UsuarioRepositorio usuarioRepositorio;
     private final PasswordEncoder passwordEncoder;
     private final PerfilRepository perfilRepository;
     private final AuthenticationManager authenticationManager;
     private final JWTService jwtService;
+    // Método para registrar un nuevo usuario.
     public void registrar(RegistroRequest registroRequest) {
         // TODO: 18/01/2024 No olvidar que falta validad la existencia del usuario y el correo
         /*
         * INCLUIRLO AQUI
          */
-       String contrasenaEncriptada =passwordEncoder.encode(registroRequest.getContrasena());
+        // Encripta la contraseña del usuario.
+        String contrasenaEncriptada =passwordEncoder.encode(registroRequest.getContrasena());
+        // Conjunto para almacenar los perfiles del usuario.
         Set<Perfiles> authorities = new HashSet<>();
+        // Itera sobre los ID de perfiles y los busca en el repositorio.
         for (Integer perfilid : registroRequest.getPerfiles()) {
             Perfiles perfil = perfilRepository.findById(perfilid).orElseThrow(() ->
                     new PerfilNotFoundException("No se encontro uno o varios perfiles asignados"));
             authorities.add(perfil);
         }
+        // Crea una nueva entidad de usuario y establece sus propiedades.
         Usuarios usuarios = new Usuarios();
         usuarios.setUsuario(registroRequest.getUsuario());
         usuarios.setContrasena(contrasenaEncriptada);
@@ -54,17 +60,22 @@ public class ServicioAuthenticacion {
         usuarios.setTelefono(registroRequest.getTelefono());
         usuarios.setEstado(true);
         usuarios.setPerfiles(authorities);
+        // Guarda el usuario en el repositorio.
         usuarioRepositorio.save(usuarios);
     }
+    // Método para autenticar a un usuario y generar un token JWT.
     public JWTResponseDto login(LoginRequest loginRequest){
         try {
+            // Autentica al usuario usando el administrador de autenticación.
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginRequest.getUsuario(), loginRequest.getContrasena()));
+            // Obtiene los detalles del usuario autenticado.
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            // Busca el usuario en el repositorio.
             Usuarios user = usuarioRepositorio.findByUsuario(userDetails.getUsername()).orElseThrow(() ->
                     new UsuarioNotFoundException("Su usuario no se encuentra registrado"));
-              return new JWTResponseDto(jwtService.generarJWT(userDetails.getUsername(), userDetails.getAuthorities(), user.getId()),"Login exitoso");
-
+            // Genera un token JWT y crea una respuesta.
+            return new JWTResponseDto(jwtService.generarJWT(userDetails.getUsername(), userDetails.getAuthorities(), user.getId()),"Login exitoso");
         }catch (UsuarioNotFoundException e){
             return new JWTResponseDto(null,"Usuario no encontrado");
         } catch (IOException | NoSuchAlgorithmException | InvalidKeySpecException | JOSEException e) {
