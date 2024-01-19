@@ -1,2 +1,4 @@
-package com.proyecto.panaderia.entity;public class TipoComprobante {
+package com.proyecto.panaderia.entity;
+
+public class TipoComprobante {
 }

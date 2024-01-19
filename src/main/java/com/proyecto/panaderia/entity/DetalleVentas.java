@@ -1,2 +1,4 @@
-package com.proyecto.panaderia.entity;public class DetalleVentas {
+package com.proyecto.panaderia.entity;
+
+public class DetalleVentas {
 }

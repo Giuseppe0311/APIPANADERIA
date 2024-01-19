@@ -1,6 +1,6 @@
 package com.proyecto.panaderia.dto;
 
-public record JWTResponse(
+public record JWTResponseDto(
         String token,
         String mensaje
 ) {

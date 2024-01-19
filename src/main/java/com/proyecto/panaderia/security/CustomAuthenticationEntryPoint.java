@@ -1,2 +1,20 @@
-package com.proyecto.panaderia.security;public class CustomAuthenticationEntryPoint {
+package com.proyecto.panaderia.security;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.AuthenticationEntryPoint;
+
+import java.io.IOException;
+
+public class CustomAuthenticationEntryPoint  implements AuthenticationEntryPoint {
+
+    @Override
+    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+        String jsonRespuesta = "{\"mensaje\": \"Acceso denegado: " + authException.getMessage() + "\"}";
+        response.setContentType("application/json");
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.getOutputStream().println(jsonRespuesta);
+    }
 }
