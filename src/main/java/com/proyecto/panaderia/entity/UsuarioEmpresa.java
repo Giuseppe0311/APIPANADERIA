@@ -16,5 +16,5 @@ public class UsuarioEmpresa {
     @ManyToOne
     private Usuarios usuario;
     @ManyToOne
-    private Empresa empresa;
+    private Empresas empresa;
 }

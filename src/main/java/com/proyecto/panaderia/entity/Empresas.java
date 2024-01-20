@@ -7,14 +7,15 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @AllArgsConstructor
-@NoArgsConstructor
 @Data
-public class Categorias {
+@NoArgsConstructor
+public class Empresas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String nombre;
-    private String descripcion;
-    @ManyToOne
-    private Empresas empresa;
+    private String informacion;
+    private String direccion;
+    private String telefono;
+
 }

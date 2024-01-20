@@ -6,12 +6,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@AllArgsConstructor
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
-public class Empresa {
+public class ProductoSucursal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String nombre;
+    @ManyToOne
+    private Productos productos;
+    @ManyToOne
+    private Sucursales sucursales;
+    private Double precioLocal;
+    private Integer stock;
+    private boolean status;
 }

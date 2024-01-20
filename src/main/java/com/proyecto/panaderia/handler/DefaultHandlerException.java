@@ -1,8 +1,7 @@
 package com.proyecto.panaderia.handler;
 
 import com.proyecto.panaderia.dto.ApiErrorDto;
-import com.proyecto.panaderia.exceptions.PerfilNotFoundException;
-import com.proyecto.panaderia.exceptions.UsuarioNotFoundException;
+import com.proyecto.panaderia.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,6 +21,27 @@ public class DefaultHandlerException extends ResponseEntityExceptionHandler {
     // Manejador de excepciones para PerfilNotFoundException.
     @ExceptionHandler
     public ResponseEntity<Object> perfilNotFound(PerfilNotFoundException ex) {
+        // Crea y configura el DTO de error de la API como en el método anterior.
+        ApiErrorDto apiError = new ApiErrorDto(HttpStatus.NOT_FOUND, ex.getMessage());
+        // Devuelve una respuesta de entidad con el estado HTTP 404 y el DTO del error.
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiError);
+    }
+    @ExceptionHandler
+    public ResponseEntity<Object> productoNotFound(ProductoNotFoundException ex) {
+        // Crea y configura el DTO de error de la API como en el método anterior.
+        ApiErrorDto apiError = new ApiErrorDto(HttpStatus.NOT_FOUND, ex.getMessage());
+        // Devuelve una respuesta de entidad con el estado HTTP 404 y el DTO del error.
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiError);
+    }
+    @ExceptionHandler
+    public ResponseEntity<Object> empresaNotFound(EmpresaNotFoundException ex) {
+        // Crea y configura el DTO de error de la API como en el método anterior.
+        ApiErrorDto apiError = new ApiErrorDto(HttpStatus.NOT_FOUND, ex.getMessage());
+        // Devuelve una respuesta de entidad con el estado HTTP 404 y el DTO del error.
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiError);
+    }
+    @ExceptionHandler
+    public ResponseEntity<Object> sucursalNotFound(SucursalNotFoundException ex) {
         // Crea y configura el DTO de error de la API como en el método anterior.
         ApiErrorDto apiError = new ApiErrorDto(HttpStatus.NOT_FOUND, ex.getMessage());
         // Devuelve una respuesta de entidad con el estado HTTP 404 y el DTO del error.

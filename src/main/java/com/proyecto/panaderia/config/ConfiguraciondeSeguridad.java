@@ -50,9 +50,9 @@ public class ConfiguraciondeSeguridad {
                 .authorizeHttpRequests(auth -> {
                     // Se permiten las peticiones de autenticación.
                     auth.requestMatchers("/api/auth/**").permitAll();
-                    auth.requestMatchers("/pruebainsana/**").hasRole("ADMIN");
+                    auth.requestMatchers("/pruebainsana/**").permitAll();
                     // Todas las demás solicitudes requieren autenticación.
-                    auth.anyRequest().authenticated();
+                    auth.anyRequest().permitAll();
                 });
         // Establece la política de creación de sesiones como STATELESS. el cual no se crea ninguna sesión.
         // de lo contrario, Spring Security creará una sesión para cada solicitud atravez de un token.
