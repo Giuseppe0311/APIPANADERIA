@@ -47,4 +47,67 @@ public class DefaultHandlerException extends ResponseEntityExceptionHandler {
         // Devuelve una respuesta de entidad con el estado HTTP 404 y el DTO del error.
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiError);
     }
+    @ExceptionHandler
+    public ResponseEntity<Object> categoriaNotFound(CategoriaNotFoundException ex) {
+        // Crea y configura el DTO de error de la API como en el método anterior.
+        ApiErrorDto apiError = new ApiErrorDto(HttpStatus.NOT_FOUND, ex.getMessage());
+        // Devuelve una respuesta de entidad con el estado HTTP 404 y el DTO del error.
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiError);
+    }
+    @ExceptionHandler
+    public ResponseEntity<Object> productoExistenten(ProductoExisteneException ex) {
+        // Crea y configura el DTO de error de la API como en el método anterior.
+        ApiErrorDto apiError = new ApiErrorDto(HttpStatus.BAD_REQUEST, ex.getMessage());
+        // Devuelve una respuesta de entidad con el estado HTTP 404 y el DTO del error.
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
+    }
+    @ExceptionHandler
+    public  ResponseEntity<Object> categoriExisteExpcion(CategoriaExistException ex) {
+        // Crea y configura el DTO de error de la API como en el método anterior.
+        ApiErrorDto apiError = new ApiErrorDto(HttpStatus.BAD_REQUEST, ex.getMessage());
+        // Devuelve una respuesta de entidad con el estado HTTP 404 y el DTO del error.
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
+    }
+    @ExceptionHandler
+    public ResponseEntity<Object> sucursalExistente(SucursalExistException ex) {
+        // Crea y configura el DTO de error de la API como en el método anterior.
+        ApiErrorDto apiError = new ApiErrorDto(HttpStatus.BAD_REQUEST, ex.getMessage());
+        // Devuelve una respuesta de entidad con el estado HTTP 404 y el DTO del error.
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
+    }
+    @ExceptionHandler
+    public ResponseEntity<Object> unidadExistente(UnidadExistException ex) {
+        // Crea y configura el DTO de error de la API como en el método anterior.
+        ApiErrorDto apiError = new ApiErrorDto(HttpStatus.BAD_REQUEST, ex.getMessage());
+        // Devuelve una respuesta de entidad con el estado HTTP 404 y el DTO del error.
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
+    }
+    @ExceptionHandler
+    public ResponseEntity<Object> productoSucursalExistente(ProductoSucursalExistException ex) {
+        // Crea y configura el DTO de error de la API como en el método anterior.
+        ApiErrorDto apiError = new ApiErrorDto(HttpStatus.BAD_REQUEST, ex.getMessage());
+        // Devuelve una respuesta de entidad con el estado HTTP 404 y el DTO del error.
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
+    }
+    @ExceptionHandler
+    public ResponseEntity<Object> proveedorExistente(ProveedorExistException ex) {
+        // Crea y configura el DTO de error de la API como en el método anterior.
+        ApiErrorDto apiError = new ApiErrorDto(HttpStatus.BAD_REQUEST, ex.getMessage());
+        // Devuelve una respuesta de entidad con el estado HTTP 404 y el DTO del error.
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
+    }
+    @ExceptionHandler
+    public ResponseEntity<Object> empresaExistente(EmpresaExistException ex) {
+        // Crea y configura el DTO de error de la API como en el método anterior.
+        ApiErrorDto apiError = new ApiErrorDto(HttpStatus.BAD_REQUEST, ex.getMessage());
+        // Devuelve una respuesta de entidad con el estado HTTP 404 y el DTO del error.
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
+    }
+    @ExceptionHandler
+    public ResponseEntity<Object> usuarioExistente(UsuarioExistException ex) {
+        // Crea y configura el DTO de error de la API como en el método anterior.
+        ApiErrorDto apiError = new ApiErrorDto(HttpStatus.BAD_REQUEST, ex.getMessage());
+        // Devuelve una respuesta de entidad con el estado HTTP 404 y el DTO del error.
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
+    }
 }

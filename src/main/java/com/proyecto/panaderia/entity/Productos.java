@@ -18,9 +18,11 @@ public class Productos {
     private String imagen;
     private Double precioBase;
     private Integer stock;
-    private boolean estado;
+    private boolean status;
     @ManyToOne
     Categorias categoria;
+    @ManyToOne
+    UnidadesMedida unidadesMedida;
     @ManyToOne
     Empresas empresa;
 }

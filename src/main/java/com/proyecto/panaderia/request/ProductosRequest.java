@@ -9,14 +9,13 @@ import org.springframework.web.multipart.MultipartFile;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductosRequest {
-private Integer id;
     private String nombre;
     private String descripcion;
-    private MultipartFile imagen;
     private Double precioBase;
     private Integer stock;
-    private boolean estado;
-    private Integer categoria;
-    private Integer empresa;
+    private String idcategoria;
+    private String idempresa;
+    private String idunidadMedida;
+    private MultipartFile imagen;
 
 }

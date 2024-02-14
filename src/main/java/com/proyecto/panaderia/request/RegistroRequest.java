@@ -1,5 +1,6 @@
 package com.proyecto.panaderia.request;
 
+import jakarta.validation.constraints.Null;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,8 +13,10 @@ import java.util.Set;
 public class RegistroRequest {
     private String usuario;
     private String contrasena;
+    private String dni;
     private String correo;
     private String telefono;
     private String nombre;
-    private Set<Integer> perfiles;
+    private Integer idempresa;
+    private Integer idsucursal;
 }

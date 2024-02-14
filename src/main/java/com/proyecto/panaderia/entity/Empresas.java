@@ -15,7 +15,9 @@ public class Empresas {
     private Integer id;
     private String nombre;
     private String informacion;
+    private String logo;
     private String direccion;
     private String telefono;
+    private boolean status;
 
 }

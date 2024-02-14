@@ -16,6 +16,10 @@ public class ProductosDTOMapper implements Function<Productos, ProductosDTO> {
                 productos.getDescripcion(),
                 productos.getImagen(),
                 productos.getPrecioBase(),
+                productos.getCategoria().getNombre(),
+                productos.getCategoria().getId(),
+                productos.getUnidadesMedida().getNombre(),
+                productos.getUnidadesMedida().getId(),
                 productos.getStock()
         );
     }

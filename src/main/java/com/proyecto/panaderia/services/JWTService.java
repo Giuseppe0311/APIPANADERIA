@@ -14,7 +14,7 @@ import java.util.Map;
 
 public interface JWTService {
     String generarJWT(String usuarios,Collection<? extends GrantedAuthority> roles,
-                      Integer idusuario) throws IOException
+                      Integer idusuario,Integer idempresa,Integer idsucursal) throws IOException
             , NoSuchAlgorithmException, InvalidKeySpecException, JOSEException;
 
     JWTClaimsSet verificarToken(String token, UserDetails userDetails) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException, ParseException, JOSEException;

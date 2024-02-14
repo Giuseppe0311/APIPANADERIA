@@ -37,7 +37,7 @@ public class JWTServiceImpl implements JWTService {
     private Resource llavePublica;
 
     @Override
-    public String generarJWT(String usuario,Collection<? extends GrantedAuthority> roles,Integer idusuario) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException, JOSEException {
+    public String generarJWT(String usuario,Collection<? extends GrantedAuthority> roles,Integer idusuario,Integer idempresa,Integer idsucursal) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException, JOSEException {
         // Carga la llave privada desde el archivo.
         PrivateKey privateKey = cargarLlavePrivada(llavePrivada);
         // Crea un firmador JWT (JWSSigner) utilizando la llave privada RSA.
@@ -48,13 +48,21 @@ public class JWTServiceImpl implements JWTService {
         // Establece el 'subject' (sujeto) del token como el ID del usuario convertido a String.
         // Establece la fecha de emisión ('issueTime') al momento actual.
         // Establece la fecha de expiración ('expirationTime') para 24 horas después del momento actual.
-        JWTClaimsSet claimsSet = new JWTClaimsSet.Builder()
+        JWTClaimsSet.Builder claimsBuilder = new JWTClaimsSet.Builder()
                 .subject(usuario)
                 .claim("roles", roles.stream().map(GrantedAuthority::getAuthority).collect(Collectors.joining(" ")))
-                .claim("idusuario",idusuario)
+                .claim("idusuario", idusuario)
                 .issueTime(now)
-                .expirationTime(new Date(now.getTime() + 1000 * 60 * 60 * 24))
-                .build();
+                .expirationTime(new Date(now.getTime() + 1000 * 60 * 60 * 24)); // 24 horas después
+        if (idempresa != null && idsucursal != null) {
+            claimsBuilder.claim("idempresa", idempresa);
+            claimsBuilder.claim("idsucursal", idsucursal);
+        }
+
+        if (idempresa != null && idsucursal==null) {
+            claimsBuilder.claim("idempresa", idempresa);
+        }
+        JWTClaimsSet claimsSet = claimsBuilder.build();
         // Crea un JWT que posteriormente sera firmado con el algoritmo RS256 y el conjunto de declaraciones creado anteriormente(claimSet).
         SignedJWT signedJWT = new SignedJWT(new JWSHeader(JWSAlgorithm.RS256),claimsSet);
         // Firma el JWT con el firmador.

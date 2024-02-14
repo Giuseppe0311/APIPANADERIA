@@ -15,6 +15,7 @@ public class ProductoSucursalDTOMapper implements Function<ProductoSucursal, Pro
     @Override
     public ProductoSucursalDTO apply(ProductoSucursal productoSucursal) {
         return new ProductoSucursalDTO(
+                productoSucursal.getId(),
                 productoSucursal.getSucursales().getId(),
                 productoSucursal.getSucursales().getNombre(),
                 productosDTOMapper.apply(productoSucursal.getProductos()),

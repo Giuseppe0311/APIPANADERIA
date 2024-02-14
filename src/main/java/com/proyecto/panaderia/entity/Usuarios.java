@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -17,6 +18,7 @@ public class Usuarios implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nombre;
+    private String dni;
     private String usuario;
     private String contrasena;
     private String correo;
@@ -29,6 +31,10 @@ public class Usuarios implements UserDetails {
             inverseJoinColumns = @JoinColumn(name="perfiles_id")
     )
     private Set<Perfiles> perfiles;
+    @ManyToOne
+    private Empresas empresa;
+    @ManyToOne
+    private Sucursales sucursal;
     public Usuarios() {
         perfiles = new HashSet<>();
     }

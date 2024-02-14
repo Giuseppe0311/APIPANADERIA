@@ -18,7 +18,7 @@ public class Sucursales {
     private String direccion;
     private String telefono;
     private String informacion;
-    private boolean estado;
+    private boolean status;
     @ManyToOne
     private Empresas empresa;
 

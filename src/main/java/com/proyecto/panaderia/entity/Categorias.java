@@ -17,4 +17,5 @@ public class Categorias {
     private String descripcion;
     @ManyToOne
     private Empresas empresa;
+    private boolean status;
 }
