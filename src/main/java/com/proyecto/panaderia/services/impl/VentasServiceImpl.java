@@ -6,6 +6,7 @@ import com.proyecto.panaderia.dto.reports.VentasPorTipoPagoDTO;
 import com.proyecto.panaderia.entity.DetalleVentas;
 import com.proyecto.panaderia.entity.Ventas;
 import com.proyecto.panaderia.exceptions.ProductoNotFoundException;
+import com.proyecto.panaderia.exceptions.ProductoSucursalExistException;
 import com.proyecto.panaderia.exceptions.SucursalNotFoundException;
 import com.proyecto.panaderia.exceptions.UsuarioNotFoundException;
 import com.proyecto.panaderia.mapper.VentasDTOMapper;
@@ -26,6 +27,7 @@ public class VentasServiceImpl implements VentasServicio {
     private final DetalleVentasRepositorio detalleVentasRepositorio;
     private final ProductosRepositorio productosRepositorio;
     private final VentasDTOMapper ventasDTOMapper;
+    private final ProductoSucursalRepositorio productoSucursalRepositorio;
 
 
     @Override
@@ -93,6 +95,15 @@ public class VentasServiceImpl implements VentasServicio {
             detalleVentas.setPrecio_venta(detalleVentasRequest.getPrecio_venta());
             detalleVentas.setSubtotal(detalleVentasRequest.getSubtotal());
             detalleVentasRepositorio.save(detalleVentas);
+            //Actualizar stock
+            productoSucursalRepositorio.findByProductoIdAndSucursalId(detalleVentasRequest.getIdproducto(),ventasRequest.getIdsucursal())
+                    .ifPresent(productoSucursal -> {
+                        if (productoSucursal.getStock()<detalleVentasRequest.getCantidad()){
+                            throw new ProductoSucursalExistException("No hay stock suficiente para el producto: "+productoSucursal.getProductos().getNombre());
+                        }
+                        productoSucursal.setStock(productoSucursal.getStock()-detalleVentasRequest.getCantidad());
+                        productoSucursalRepositorio.save(productoSucursal);
+                    });
         }
         );
     }
