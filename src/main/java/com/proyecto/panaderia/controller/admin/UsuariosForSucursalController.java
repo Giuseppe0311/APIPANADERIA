@@ -17,11 +17,11 @@ public class UsuariosForSucursalController {
     private final UserServiceForSucursal userServiceForSucursal;
     @GetMapping
     public ResponseEntity<?> getUser(
-            @RequestParam(required = false) boolean bySucursal,
+            @RequestParam(required = false) Integer idEmpresa,
             @RequestParam(required = false) Integer idusuario
     ) {
-        if (bySucursal) {
-            return ResponseEntity.ok(userServiceForSucursal.getAllUserOfSucursal());
+        if (idEmpresa != null) {
+            return ResponseEntity.ok(userServiceForSucursal.getAllUserOfEmpresaId(idEmpresa));
         } else if (idusuario != null) {
             return ResponseEntity.ok(userServiceForSucursal.getUsuarioByid(idusuario));
         }

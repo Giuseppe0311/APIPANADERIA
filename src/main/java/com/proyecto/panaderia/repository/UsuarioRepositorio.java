@@ -36,5 +36,15 @@ public interface UsuarioRepositorio extends JpaRepository<Usuarios,Integer> {
             "estado = true AND id <> ?4", nativeQuery = true)
     Optional<Usuarios> findByUsuarioOrDniOrCorreoIgnoreCaseAndTrimExcludingId(String usuario, String dni, String correo, Integer id);
 
-
+    @Query(value = """
+            SELECT
+                usuarios.*
+            FROM
+                usuarios
+            INNER JOIN
+                sucursales ON usuarios.sucursal_id = sucursales.id
+            WHERE
+                sucursales.empresa_id =?1 AND estado=true;
+            """,nativeQuery = true)
+    List<Usuarios> findAllUserbyEmpresaId(Integer id);
 }

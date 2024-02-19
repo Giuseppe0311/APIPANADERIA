@@ -28,8 +28,8 @@ public class UserServiceForAdminSucursalimpl implements UserServiceForSucursal {
     private final SucursalesRepositorio sucursalesRepositorio;
 
     @Override
-    public List<UsuarioAdminSucusalDTO> getAllUserOfSucursal() {
-        return usuarioRepositorio.getAllUserOfEmpresasAndSucursales()
+    public List<UsuarioAdminSucusalDTO> getAllUserOfEmpresaId(Integer idEmpresa) {
+        return usuarioRepositorio.findAllUserbyEmpresaId(idEmpresa)
                 .stream()
                 .map(usuarioAdminSucursalDTOMapper)
                 .toList();
