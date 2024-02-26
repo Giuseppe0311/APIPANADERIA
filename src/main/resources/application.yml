@@ -1,7 +1,7 @@
 CLOUDINARY_URL: ${CLOUDINARY_URL}
 debug: false
 server:
-    port: 8094
+    port: ${PORT}
 jwtKeys:
   privateKeyPath: jwtKeys/private.key.pem
   publicKeyPath: jwtKeys/public.key.pem
