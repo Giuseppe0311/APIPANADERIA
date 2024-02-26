@@ -1,0 +1,27 @@
+CLOUDINARY_URL: ${CLOUDINARY_URL}
+debug: true
+jwtKeys:
+  privateKeyPath: jwtKeys/private.key.pem
+  publicKeyPath: jwtKeys/public.key.pem
+spring:
+  datasource:
+    password: ${DB_PASSWORD}
+    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+    username: ${DB_USERNAME}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    show-sql: true
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /docs
